@@ -1,4 +1,4 @@
-library(ggplot2)
+library(ggplot2) 
 library(patchwork)
 library(egg)
 library(dplyr)
@@ -137,19 +137,6 @@ g3 <- ggplot(plot_df) +
     panel.grid.major = element_blank()
   )
 
-# find which l is better for each H
-best_l_DM <- plot_df %>%
-  group_by(H) %>%
-  filter(mse == min(mse)) %>%
-  ungroup()
-
-best_l_df <- data.frame(l=c(best_l_DM$l,best_l_FATE$l,best_l_BC$l),
-                        H=rep(best_l_DM$H,3),
-                        type=rep(c('DM','DMB','BC'),each=nrow(best_l_DM)))
-
-ggplot(best_l_df) +
-  geom_line(aes(H,l,color=type))
-
 #### plot ####
 
 ggarrange(g3, 
@@ -162,3 +149,16 @@ ggarrange(g3,
                   axis.ticks.y = element_blank(),
                   axis.title.y = element_blank() ),
           nrow = 1)
+
+# find which l is better for each H
+best_l_DM <- plot_df %>%
+  group_by(H) %>%
+  filter(mse == min(mse)) %>%
+  ungroup()
+
+best_l_df <- data.frame(l=c(best_l_DM$l,best_l_FATE$l,best_l_BC$l),
+                        H=rep(best_l_DM$H,3),
+                        type=rep(c('DM','DMB','BC'),each=nrow(best_l_DM)))
+
+ggplot(best_l_df) +
+  geom_line(aes(H,l,color=type))
