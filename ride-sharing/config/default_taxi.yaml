@@ -7,7 +7,7 @@ experiment:
   p: 0.5              # Probability of treatment B
   type: switchback          # Either "switchback" or "ab"
   salt: ""          # Effectively a random seed
-  interval: 2000  # Switchback interval (for type=switchback), seconds
+  interval: 4000  # Switchback interval (for type=switchback), seconds
 
 init:
   state_pkl: null  # Path to a pickled checkpoint state
