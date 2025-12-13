@@ -1,0 +1,52 @@
+T: 400000
+cost_per_km: 0.6
+cost_per_sec: 0.01
+min_ts: 0.
+
+experiment:
+  p: 0.5              # Probability of treatment B
+  type: switchback          # Either "switchback" or "ab"
+  salt: ""          # Effectively a random seed
+  interval: 2000  # Switchback interval (for type=switchback), seconds
+
+init:
+  state_pkl: null  # Path to a pickled checkpoint state
+  min_ts: 0.
+
+output:
+  dir: /tmp/
+  type: requests
+  shapefile: data/neighborhoods.shp
+  checkpoint_interval: 10000
+
+pricing:
+    price_factor: 1.5
+    etd_factor: 1.5
+    cost_basis: solo
+
+driver:
+  capacity: 3
+  mean_shift_length: 30000
+  generator: taxi
+  method: uniform
+  trips_fname: data/2015_Yellow.csv
+  shp_fname: data/taxi_zones.zip
+  rel_rate: 0.003
+
+rider:
+  mean_wtp_per_sec: 0.003
+  sigma: 1
+  generator: taxi
+  method: uniform
+  rel_rate: 0.1
+  trips_fname: data/2015_Yellow.csv
+  # trips_fname: data/test-riders.csv
+  shp_fname: data/taxi_zones.zip
+
+dispatch:
+  A:
+    knn: 10
+    savings_threshold: 0.5
+  B:
+    knn: 10
+    savings_threshold: 1
