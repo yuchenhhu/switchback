@@ -2,11 +2,11 @@ library(ggplot2)
 theme_set(theme_bw())
 
 # read data
-dir <- "switchback/ride_sharing/rideshare-simulator/output_4000/"
+dir <- "switchback/ride_sharing/rideshare-simulator/output/"
 setwd("/home/users/yuchenhu")
 # please note that treatment in the paper is marked as control here
 
-# find average ride length + histogram
+# find average ride length + histogram for Figure 5 (left panel)
 i=1
 summary <- read.csv(paste0(dir,'summary', i,'.csv'))
 mean(summary$etd[summary$world_line=="A"])
@@ -27,8 +27,8 @@ ggplot(summary[summary$world_line == "A" & summary$etd <= 10000, ],
   ) + theme(legend.position="none")
 
 
-# try lepski-type figure for motivating choice of b
-res_table <- read.csv("switchback/ride_sharing/rideshare-simulator/scripts/lepski_plot.csv", header=F)
+# reproducing Figure 5 (right panel)
+res_table <- read.csv("switchback/ride_sharing/rideshare-simulator/lepski_plot.csv", header=F)
 res_table <- -res_table
 res_df <- data.frame(value = c(c(res_table$V1[1],res_table$V2),
                                c(res_table$V1[1],res_table$V3),
@@ -54,8 +54,8 @@ ggplot(res_df[res_df$type=='estimator',]) +
   ) + theme(legend.position="top")
 
 
-# try HT estimator
-dir <- "switchback/ride_sharing/rideshare-simulator/output_4000/"
+# compute HT estimator for Table S4 (second part)
+dir <- "switchback/ride_sharing/rideshare-simulator/output/"
 setwd("/home/users/yuchenhu")
 
 niter <- 100
