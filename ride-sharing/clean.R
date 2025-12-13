@@ -21,7 +21,7 @@ dir <- "switchback/ride_sharing/rideshare-simulator/output/"
 setwd("/home/users/yuchenhu")
 
 H_t <- 400000
-switch_length <- 2000 # 6000 # 4000
+switch_length <- 4000 # 6000 # 2000
 
 interval <- 400
 niter <- 100
